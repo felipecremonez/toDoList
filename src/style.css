@@ -1,0 +1,67 @@
+body{
+    margin: 0;
+    padding: 0;
+    background-color: #E5E5E5;
+}
+.containerCenter{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 75%;
+    height: 100%;
+    margin: 25px auto;
+    background-color: #5959f1;
+    border-radius: 10px;
+    border: black 1px solid;
+    /* animation: moveUpDown 2s infinite; */
+    flex-direction: column;
+}
+@keyframes moveUpDown {
+    0% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+
+
+.noteBlock {
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    width: 75%;
+    height: 70vh;
+    margin: 25px auto;
+    background-color: #5959f1;
+    border-radius: 10px;
+    border: black 2px solid;
+    flex-direction: column;
+
+}
+.noteInput {
+    width: 60%;
+    height: 30px;
+    display: flex;
+    justify-content: start;
+    align-items: start;
+    border-radius: 12px;    
+    margin: 25px;
+    outline: none;
+    font-family: cursive;
+    font-size: 15px;
+    border: none;
+}
+.taskContainer{
+    display: flex;
+    width: 100%;
+    align-items: center;
+    
+}
+.taskContainer spam{
+    cursor: pointer;
+}
