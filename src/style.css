@@ -29,13 +29,12 @@ body{
 }
 
 
-
 .noteBlock {
     display: flex;
     justify-content: start;
     align-items: start;
     width: 75%;
-    height: 70vh;
+    height: 60vh;
     margin: 25px auto;
     background-color: #5959f1;
     border-radius: 10px;
@@ -60,8 +59,34 @@ body{
     display: flex;
     width: 100%;
     align-items: center;
-    
+    justify-content: center;
+    flex-direction: row;
+    margin-right: 10px;
 }
 .taskContainer spam{
     cursor: pointer;
+    font-family: cursive;
+    font-size: 15px;
+    color: #E5E5E5;
+    background-color: purple;
+    border-radius: 12px;
+    padding: 5px;
+    transition: all 0.5s ease;
+}
+.taskContainer spam:hover{
+    translate: 0 -5px;
+    background-color: #333;
+}
+.noteBlock{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: wrap;
+}
+.noteBlock li{
+    list-style-type: none;
+    font-size: 1.4rem;
+    text-transform: capitalize;
+    display: flex;
+    justify-content: space-around;
 }
