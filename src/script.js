@@ -2,7 +2,7 @@
 const localStorageNameKey = "to-do-list"
 
 function validateIfExistsNewTask(){
-    let values = JSON.parse(localStorage.getItem(localStorageNameKey) || [])
+    let values = JSON.parse(localStorage.getItem(localStorageNameKey) || "[]")
     let inputValue = document.getElementById("inputNewTask").value
     let exists = values.find(x => x.name == inputValue)
     return !exists ? false : true 
@@ -20,7 +20,7 @@ function newTask(){
     }
     else{
     //increment to LocalStorage
-    let values = JSON.parse(localStorage.getItem("to-do-list")) || []
+    let values = JSON.parse(localStorage.getItem("to-do-list")) || "[]"
     values.push({
         name: input.value
     });
@@ -34,7 +34,7 @@ function newTask(){
 }
 
 function showValues(){
-    let values = JSON.parse(localStorage.getItem("to-do-list")) || []
+    let values = JSON.parse(localStorage.getItem("to-do-list")) || "[]"
     let list = document.getElementById("to-do-list")
     list.innerHTML = ''
     for(let i = 0; i < values.length; i++)
@@ -48,7 +48,7 @@ function showValues(){
 
 
 function removeItem(data){
-    let values = JSON.parse(localStorage.getItem("to-do-list")) || []
+    let values = JSON.parse(localStorage.getItem("to-do-list")) || "[]"
     let index = values.findIndex( x => x.name == data)
     values.splice(index, 1)
     localStorage.setItem(localStorageNameKey, JSON.stringify(values))
