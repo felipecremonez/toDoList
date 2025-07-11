@@ -1,59 +1,35 @@
+// script.js
 
-const localStorageNameKey = "to-do-list"
+document.addEventListener("DOMContentLoaded", function () {
+    const input = document.getElementById("inputNewTask");
+    const button = document.getElementById("includeTask");
+    const list = document.getElementById("to-do-list");
 
-function validateIfExistsNewTask(){
-    let values = JSON.parse(localStorage.getItem(localStorageNameKey) || "[]")
-    let inputValue = document.getElementById("inputNewTask").value
-    let exists = values.find(x => x.name == inputValue)
-    return !exists ? false : true 
-}
-function newTask(){
-    let input = document.getElementById("inputNewTask");
-    input.style.border = ''
-    //validação
-    if( !input.value){
-        input.style.border = "2px solid red"
-        alert("Digite algo para ser inserido na lista.")
+    button.addEventListener("click", newTask);
+
+    function newTask() {
+        const taskText = input.value.trim();
+
+        if (taskText === "") {
+            alert("Digite alguma tarefa!");
+            return;
+        }
+
+        // Criando o elemento da tarefa
+        const li = document.createElement("li");
+        li.className = "taskItem";
+        li.innerHTML = `
+            <span>${taskText}</span>
+            <button class="deleteBtn">Excluir</button>
+        `;
+
+        list.appendChild(li);
+        input.value = "";
+        input.focus();
+
+        // Botão de excluir funcional
+        li.querySelector(".deleteBtn").addEventListener("click", function () {
+            li.remove();
+        });
     }
-    else if(validateIfExistsNewTask()){
-        alert("Tarefa ja existe na lista.")
-    }
-    else{
-    //increment to LocalStorage
-    let values = JSON.parse(localStorage.getItem("to-do-list")) || "[]"
-    values.push({
-        name: input.value
-    });
-    localStorage.setItem(localStorageNameKey, JSON.stringify(values))
-    showValues()
-    }
-
-    input.value = ''
-
-
-}
-
-function showValues(){
-    let values = JSON.parse(localStorage.getItem("to-do-list")) || "[]"
-    let list = document.getElementById("to-do-list")
-    list.innerHTML = ''
-    for(let i = 0; i < values.length; i++)
-    {
-        list.innerHTML += `<li>${values[i]['name']} <button id='btn-ok' onclick='removeItem("${values[i].name}")'><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-check-lg" viewBox="0 0 16 16">
-  <path d="M12.736 3.97a.733.733 0 0 1 1.047 0c.286.289.29.756.01 1.05L7.88 12.01a.733.733 0 0 1-1.065.02L3.217 8.384a.757.757 0 0 1 0-1.06.733.733 0 0 1 1.047 0l3.052 3.093 5.4-6.425z"/>
-</svg></button><li>`
-    }
-
-}
-
-
-function removeItem(data){
-    let values = JSON.parse(localStorage.getItem("to-do-list")) || "[]"
-    let index = values.findIndex( x => x.name == data)
-    values.splice(index, 1)
-    localStorage.setItem(localStorageNameKey, JSON.stringify(values))
-    showValues()
-}
-
-showValues()
-
+});

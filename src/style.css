@@ -118,8 +118,67 @@ body{
     word-break: break-all;
 }
 #to-do-list li:hover{
-    background-color: #5959f1;
     transition: .4s;
     border-radius: 1rem;
     padding-left: 1rem;
+}
+
+@media (max-width: 600px) {
+    .noteInput {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    #includeTask {
+        width: 100%;
+        justify-content: center;
+    }
+}
+/* Estilo da lista de tarefas */
+#to-do-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.taskItem {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #ffffff;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    padding: 15px;
+    border-radius: 8px;
+    transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.taskItem:hover {
+    transform: scale(1.02);
+    background: #f9f9f9;
+}
+
+/* Estilo do texto da tarefa */
+.taskItem span {
+    flex: 1;
+    font-size: 1rem;
+    color: #333;
+    word-break: break-word;
+}
+
+/* Botão de excluir */
+.deleteBtn {
+    background: linear-gradient(45deg, #ff4d4d, #e60000);
+    color: white;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.deleteBtn:hover {
+    background: linear-gradient(45deg, #e60000, #b30000);
+    transform: scale(1.05);
 }
