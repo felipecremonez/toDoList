@@ -1,3 +1,15 @@
+
+//----------***Métodos de um objeto no Array:***----------
+
+// push: Adicionar novo item no array
+// filter: Cria um novo array mantendo só os itens que passam numa condição
+// map: Cria um novo array modificando os itens, sem alterar o original
+// splice: Serve pra remover ou substituir coisas dentro do array
+// includes(): Para saber se um valor existe dentro de um array
+
+// --------------------------------------------------------
+
+
 const taskInput = document.getElementById("taskInput");
 const btnAdd = document.getElementById("btnAdd");
 const taskList = document.getElementById("taskList");
@@ -16,9 +28,11 @@ function save() {
 // ADICIONAR TASK
 btnAdd.onclick = () => {
     const text = taskInput.value.trim();
-    if (!text) return alert("Escreve a porra da task, cavalo.");
+    // .trim() serve para tirar os espaçamentos em branco do começo e no final da string
+    if (!text) return alert("Digite algo para incluir.");
 
     tasks.push({
+    // push serve para adicionar um novo item dentro de um array
         text,
         done: false
     });
