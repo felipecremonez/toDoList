@@ -1,60 +1,86 @@
-document.addEventListener("DOMContentLoaded", function () {
-    const input = document.getElementById("inputNewTask");
-    const button = document.getElementById("includeTask");
-    const list = document.getElementById("to-do-list");
+const taskInput = document.getElementById("taskInput");
+const btnAdd = document.getElementById("btnAdd");
+const taskList = document.getElementById("taskList");
+const filter = document.getElementById("filter");
+const btnTheme = document.getElementById("btnTheme");
 
-    // Carrega tarefas do localStorage ao iniciar
-    const savedTasks = JSON.parse(localStorage.getItem("tasks")) || [];
-    savedTasks.forEach(task => {
-        addTaskToDOM(task);
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+render();
+
+// SALVAR NO LOCALSTORAGE
+function save() {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+// ADICIONAR TASK
+btnAdd.onclick = () => {
+    const text = taskInput.value.trim();
+    if (!text) return alert("Escreve a porra da task, cavalo.");
+
+    tasks.push({
+        text,
+        done: false
     });
 
-    // Clique no botão "Include Task"
-    button.addEventListener("click", function () {
-        const taskText = input.value.trim();
+    save();
+    render();
+    taskInput.value = "";
+};
 
-        if (taskText === "") {
-            alert("Digite alguma tarefa!");
-            return;
-        }
+// RENDERIZAR TAREFAS
+function render() {
+    taskList.innerHTML = "";
 
-        addTaskToDOM(taskText);
-        saveTask(taskText);
+    let filtered = tasks;
 
-        input.value = "";
-        input.focus();
-    });
+    if (filter.value === "done")
+        filtered = tasks.filter(t => t.done);
 
-    // Função para adicionar tarefa no DOM
-    function addTaskToDOM(taskText) {
-        const li = document.createElement("li");
-        li.className = "taskItem";
-        li.innerHTML = `
-            <span>${taskText}</span>
-            <button class="deleteBtn">Excluir</button>
+    if (filter.value === "pending")
+        filtered = tasks.filter(t => !t.done);
+
+    filtered.forEach((task, index) => {
+        const div = document.createElement("div");
+        div.className = "task" + (task.done ? " done" : "");
+
+        div.innerHTML = `
+            <span contenteditable="true" class="edit">${task.text}</span>
+
+            <div class="icons">
+                <button class="btnDone"><i class="fa-solid fa-check"></i></button>
+                <button class="btnDelete"><i class="fa-solid fa-trash"></i></button>
+            </div>
         `;
 
-        // Botão de excluir
-        li.querySelector(".deleteBtn").addEventListener("click", function () {
-            li.remove();
-            removeTask(taskText);
-        });
+        // MARCAR COMO CONCLUÍDA
+        div.querySelector(".btnDone").onclick = () => {
+            task.done = !task.done;
+            save();
+            render();
+        };
 
-        list.appendChild(li);
-    }
+        // EXCLUIR
+        div.querySelector(".btnDelete").onclick = () => {
+            tasks.splice(index, 1);
+            save();
+            render();
+        };
 
-    // Salva tarefa no localStorage
-    function saveTask(taskText) {
-        const tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks.push(taskText);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
+        // EDITAR
+        div.querySelector(".edit").onblur = (e) => {
+            task.text = e.target.innerText;
+            save();
+        };
 
-    // Remove tarefa do localStorage
-    function removeTask(taskText) {
-        let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
-        tasks = tasks.filter(task => task !== taskText);
-        localStorage.setItem("tasks", JSON.stringify(tasks));
-    }
-});
+        taskList.appendChild(div);
+    });
+}
 
+// FILTRO
+filter.onchange = () => render();
+
+// TEMA DARK/LIGHT
+btnTheme.onclick = () => {
+    document.body.classList.toggle("light");
+};

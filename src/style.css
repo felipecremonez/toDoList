@@ -1,184 +1,145 @@
-body{
+body {
     margin: 0;
-    padding: 0;
-    background-color: #E5E5E5;
-}
-.containerCenter{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 75%;
-    height: 100%;
-    margin: 25px auto;
-    background-color: #5959f1;
-    border-radius: 10px;
-    border: black 1px solid;
-    /* animation: moveUpDown 2s infinite; */
-    flex-direction: column;
-}
-@keyframes moveUpDown {
-    0% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-15px);
-    }
-    100% {
-        transform: translateY(0);
-    }
+    font-family: Arial;
+    background: #222;
+    color: #fff;
+    transition: 0.3s;
 }
 
+body.light {
+    background: #f2f2f2;
+    color: #222;
+}
 
-.noteBlock {
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    width: 75%;
-    height: 60vh;
-    margin: 25px auto;
-    background-color: #5959f1;
-    border-radius: 10px;
-    border: black 2px solid;
-    flex-direction: column;
-
-}
-.noteInput {
-    width: 60%;
-    height: 30px;
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    border-radius: 12px;    
-    margin: 25px;
-    outline: none;
-    font-family: cursive;
-    font-size: 15px;
-    border: none;
-}
-.taskContainer{
-    display: flex;
-    width: 100%;
-    align-items: center;
-    justify-content: center;
-    flex-direction: row;
-    margin-right: 10px;
-}
-.taskContainer spam{
-    cursor: pointer;
-    font-family: cursive;
-    font-size: 15px;
-    color: #E5E5E5;
-    background-color: purple;
+.container {
+    width: 450px;
+    margin: 40px auto;
+    padding: 20px;
     border-radius: 12px;
-    padding: 5px;
-    transition: all 0.5s ease;
+    background: #333;
 }
-.taskContainer spam:hover{
-    translate: 0 -5px;
-    background-color: #333;
+
+body.light .container {
+    background: #fff;
 }
-.noteBlock{
+
+h1 {
+    text-align: center;
+}
+
+.controls {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    flex: wrap;
-}
-.noteBlock li{
-    list-style-type: none;
-    font-size: 1.4rem;
-    display: flex;
-    justify-content: space-around;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
-#btn-ok{
-    cursor: pointer;
-    font-family: cursive;
-    font-size: 1rem;
-    color: #E5E5E5;
-    background-color: #333;
-    border-radius: 50%;
-    padding: 12px;
-    transition: all 0.5s ease;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-#btn-ok:hover{
-    translate: 0 -5px;
-    background-color: green;
-}
-#to-do-list li{
-    list-style-type: none;
-    font-size: 1.4rem;
-    display: flex;
-    justify-content: space-between;
-    font-family: cursive;
-    font-size: 1.6rem;
-    color:#E5E5E5;
-    word-break: break-all;
-}
-#to-do-list li:hover{
-    transition: .4s;
-    border-radius: 1rem;
-    padding-left: 1rem;
-}
-
-@media (max-width: 600px) {
-    .noteInput {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    #includeTask {
-        width: 100%;
-        justify-content: center;
-    }
-}
-/* Estilo da lista de tarefas */
-#to-do-list {
-    list-style: none;
-    padding: 0;
-    margin-top: 20px;
-}
-
-.taskItem {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #ffffff;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-    margin-bottom: 10px;
-    padding: 15px;
-    border-radius: 8px;
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.taskItem:hover {
-    transform: scale(1.02);
-    background: #f9f9f9;
-}
-
-/* Estilo do texto da tarefa */
-.taskItem span {
+#taskInput {
     flex: 1;
-    font-size: 1rem;
-    color: #333;
-    word-break: break-word;
-}
-
-/* Botão de excluir */
-.deleteBtn {
-    background: linear-gradient(45deg, #ff4d4d, #e60000);
-    color: white;
+    padding: 10px;
+    border-radius: 6px;
     border: none;
-    padding: 8px 14px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: background 0.2s ease, transform 0.2s ease;
 }
 
-.deleteBtn:hover {
-    background: linear-gradient(45deg, #e60000, #b30000);
-    transform: scale(1.05);
+button {
+    cursor: pointer;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 6px;
+    background: #5c5cff;
+    color: #fff;
+    font-weight: bold;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+#filter {
+    padding: 10px;
+    border-radius: 6px;
+}
+
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #444;
+    padding: 12px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transform: translateY(10px);
+    opacity: 0;
+    animation: slideIn 0.2s forwards;
+}
+
+@keyframes slideIn {
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+.task.done {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.edit {
+    flex: 1;
+    outline: none;
+}
+
+.icons {
+    display: flex;
+    gap: 10px;
+}
+
+/* BOTÃO DE EXCLUIR — atualizado pra ficar bonito */
+.btnDelete {
+    background: #ff4747;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnDelete i {
+    color: white;
+    font-size: 16px;
+}
+
+.btnDelete:hover {
+    background: #ff2e2e;
+}
+
+body.light .btnDelete {
+    background: #ff6b6b;
+}
+
+body.light .btnDelete:hover {
+    background: #ff4a4a;
+}
+
+/* Botão de concluir */
+.btnDone {
+    background: #5cff5c;
+    border: none;
+    padding: 8px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btnDone i {
+    color: #000;
+    font-size: 16px;
+}
+
+.btnDone:hover {
+    background: #38e038;
 }

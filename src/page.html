@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-do List do Carai</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js" defer></script>
-    <title>To do List</title>
+
+    <!-- ícones -->
+    <script src="https://kit.fontawesome.com/6b0c1fe9d0.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="containerCenter">
-        <h1>To Do List</h1>
-        <div class="taskContainer">
-            <!-- input and spam to include -->
-            <input type="text" id="inputNewTask" class="noteInput" placeholder="Enter your note">
-            <spam onclick="newTask()" id="includeTask">Include Task
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-                    <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2"/>
-                </svg>
-            </spam>
-        </div>
+
+<div class="container">
+
+    <h1><i class="fa-solid fa-list-check"></i> Lista de Tarefas</h1>
+
+    <div class="controls">
+        <input id="taskInput" placeholder="Digite sua tarefa seu animal">
+        <button id="btnAdd">Adicionar</button>
+
+        <select id="filter">
+            <option value="all">Todas</option>
+            <option value="done">Concluídas</option>
+            <option value="pending">Pendentes</option>
+        </select>
+
+        <button id="btnTheme">🌙</button>
     </div>
-    
-    <div class="noteBlock">
-        <ul id="to-do-list">
-            
-        </ul>
-    </div>
+
+    <div id="taskList"></div>
+
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
